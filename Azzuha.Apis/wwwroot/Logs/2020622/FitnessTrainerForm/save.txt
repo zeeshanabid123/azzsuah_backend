@@ -1,0 +1,3 @@
+6/22/2020 7:33:29 AM ==> UserId:  Error: Your card was declined. Your request was in test mode, but used a non test (live) card. For a list of valid test cards, visit: https://stripe.com/docs/testing.
+6/22/2020 7:34:40 AM ==> UserId:  Error: You cannot use a Stripe token more than once: tok_1GwkA1E3gXs0tL8ZULUALEP8.
+6/22/2020 7:45:34 AM ==> UserId:  Error: Missing required param: source.

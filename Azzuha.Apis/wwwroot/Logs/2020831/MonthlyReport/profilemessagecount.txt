@@ -1,0 +1,1 @@
+8/31/2020 11:44:28 AM ==> UserId:  Error: The required column 'PastStats' was not present in the results of a 'FromSql' operation.

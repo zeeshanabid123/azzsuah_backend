@@ -1,0 +1,5 @@
+2/18/2021 9:27:56 AM ==> UserId:  Error: The required column 'ProfileTypeId' was not present in the results of a 'FromSql' operation.
+2/18/2021 9:28:02 AM ==> UserId:  Error: The required column 'ProfileTypeId' was not present in the results of a 'FromSql' operation.
+2/18/2021 9:28:13 AM ==> UserId:  Error: The required column 'ProfileTypeId' was not present in the results of a 'FromSql' operation.
+2/18/2021 9:29:03 AM ==> UserId:  Error: The required column 'ProfileTypeId' was not present in the results of a 'FromSql' operation.
+2/18/2021 9:29:13 AM ==> UserId:  Error: The required column 'ProfileTypeId' was not present in the results of a 'FromSql' operation.

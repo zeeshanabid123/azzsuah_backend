@@ -1,0 +1,14 @@
+3/19/2021 6:05:55 AM ==> UserId:  Error: Refresh token failed - invalid_grant
+3/19/2021 6:12:17 AM ==> UserId:  Error: Object reference not set to an instance of an object.
+3/19/2021 6:13:16 AM ==> UserId:  Error: A transport-level error has occurred when receiving results from the server. (provider: Session Provider, error: 19 - Physical connection is not usable)
+3/19/2021 6:14:19 AM ==> UserId:  Error: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+3/19/2021 6:15:27 AM ==> UserId:  Error: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+3/19/2021 6:17:23 AM ==> UserId:  Error: Forbidden
+3/19/2021 6:31:09 AM ==> UserId:  Error: Forbidden
+3/19/2021 6:42:32 AM ==> UserId:  Error: A transport-level error has occurred when sending the request to the server. (provider: Session Provider, error: 19 - Physical connection is not usable)
+3/19/2021 6:54:30 AM ==> UserId:  Error: Forbidden
+3/19/2021 7:06:32 AM ==> UserId:  Error: Forbidden
+3/19/2021 7:10:19 AM ==> UserId:  Error: Forbidden
+3/19/2021 10:12:25 AM ==> UserId:  Error: Entity type 'State' is defined with a 2-part composite key, but 1 values were passed to the 'DbSet.Find' method.
+3/19/2021 10:13:18 AM ==> UserId:  Error: Entity type 'State' is defined with a 2-part composite key, but 1 values were passed to the 'DbSet.Find' method.
+3/19/2021 10:18:34 AM ==> UserId:  Error: Object reference not set to an instance of an object.

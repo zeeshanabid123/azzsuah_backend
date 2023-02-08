@@ -1,0 +1,315 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<div ng-controller="Users">
+    <div class="btn-container">
+        <button type="button" class="btn btn-default" ng-click="showAddUser()">
+            Add Users
+        </button>
+        <button class="btn btn-primary" ng-click="showAddRole()"><i class="fa fa-plus"></i> Add Role</button>
+        <button class="btn btn-primary" ng-click="showAddrights()"><i class="fa fa-mail-forward"></i> Assign Rights</button>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Admin Users Table</h3>
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 250px;">
+                                <input type="text" name="table_search" class="form-control float-right" ng-model="SearchFilter" ng-change="findSearch()" ng-model-options="{debounce: 400}" placeholder="Search">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="overlay d-flex justify-content-center align-items-center" id="loadtable">
+                            <i class="fas fa-2x fa-sync fa-spin"></i>
+                        </div>
+                        <table class="table table-bordered">
+
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Full Name</th>
+                                    <th>Email Address</th>
+                                    <th>Designation</th>
+                                    <th>Status</th>
+                                    <th>Publish On </th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="cust in blogslist  | filter: SearchFilter | itemsPerPage: pageSize" current-page="currentPage">
+                                    <td>{{ ($index + 1) + (currentPage - 1) * pageSize}}</td>
+                                    <td>{{cust.fullName}}</td>
+                                    <td>{{cust.email}}</td>
+                                    <td>{{cust.designation}}</td>
+
+                                    <td>
+                                        <span class="right badge badge-success" ng-if="cust.enableFlag == true">Publish</span>
+                                        <span class="right badge badge-danger" ng-if="cust.enableFlag != true">Un-Publish</span>
+                                    </td>
+                                    <td>
+                                        <p ng-bind="cust.createdDtg | date:'MM-dd-yyyy'"></p>
+                                    </td>
+                                    <td>
+                                        <div class="margin">
+                                            <button type="button" ng-click="GetEditUser(cust.id)" class="btn btn-secondary">Edit</button>
+                                            @*<button type="button" ng-click="DeletePosts(cust.id)" class="btn btn-danger">Delete</button>*@
+                                            <a class="btn btn-success" title="Block Post" ng-click="Status(cust.id, 2 )" ng-if="cust.enableFlag == true">Active</a>
+                                            <a class="btn btn-danger" title="Publish Post" ng-click="Status(cust.id , 1 )" ng-if="cust.enableFlag != true">De Active</a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <dir-pagination-controls></dir-pagination-controls>
+                    </div>
+
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Large Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" name="frm" ng-submit="save()">
+                        <div class="form-group">
+                            <label class="form-label" for="Name">Name: </label>
+                            <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter your Name" ng-model="user.FullName" required>
+                            <span style="color: red" ng-show="frm.Name.$dirty && frm.Name.$invalid">
+                                <span ng-show="frm.Name.$error.required">Name is required.</span>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="un">User Name: </label>
+                            <input type="text" ng-blur="CheckUserName(user.UserName)" class="form-control" id="un" name="username" placeholder="Enter your User Name" ng-model="user.UserName" required>
+                            <p id="useralready" style="color:red; display:{{usernamealready}}">User Name is Already Exist</p>
+                            <span style="color: red" ng-show="frm.username.$dirty && frm.username.$invalid">
+                                <span ng-show="frm.username.$error.required">User Name is required.</span>
+                            </span>
+                        </div>
+                        <div class="form-group" ng-if="GenrateFalg == false">
+                            <label class="form-label" for="p">Password: </label>
+                            <input type="password" class="form-control" id="p" name="pass" placeholder="At least one upper case, one digit, one special character, Minimum 8 length" ng-model="user.Password" required pattern="^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#.?!$%^&*-]).{8,}$">
+
+                            <span style="color: red" ng-show="frm.pass.$dirty && frm.pass.$invalid">
+                                <span ng-show="frm.pass.$error.required">Password is required.</span>
+                                <span ng-show="frm.pass.$error.pattern">At least one upper case,<br /> At least one digit,<br /> At least one special character(without @@ and _ ),<br /> Minimum eight in length</span>
+                            </span>
+
+                        </div>
+
+                        <div class="form-group" ng-if="GenrateFalg == true">
+                            <label class="form-label" for="p">Password: </label>
+                            <input type="text" class="form-control" id="Password" name="Password" placeholder="" ng-model="user.Password" ng-value="myVar" required>
+                            <span style="color: red" ng-show="frm.pass.$dirty && frm.pass.$invalid">
+                                <span ng-show="frm.pass.$error.required">Password is required.</span>
+                                <span ng-show="frm.pass.$error.pattern">At least one upper case,<br /> At least one digit,<br /> At least one special character(without @@ and _ ),<br /> Minimum eight in length</span>
+                            </span>
+                        </div>
+                        @*<input type="button" value="Generate" ng-click="passGenrateer()" />*@
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email address: </label>
+                            <input type="email" ng-blur="CheckEmail(user.Email)" name="email" class="form-control" id="email" placeholder="Enter your email" ng-model="user.Email" required>
+
+                            <span style="color: red" ng-show="frm.email.$dirty  && frm.email.$invalid">
+                                <span ng-show="frm.email.$error.required">Email is required.</span>
+                                <span ng-show="frm.email.$error.email">Enter Valid Email.</span>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="n">Phone Number: </label>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <ui-select id="CountryCode" style="width:100%;margin-top:7px;" ng-model="$parent.Sdrp" theme="select2" title="SELECT" ng-required="true">
+                                        <ui-select-match placeholder="SELECT">{{$select.selected.code}}</ui-select-match>
+                                        <ui-select-choices repeat="item in drp | filter:$select.search">
+                                            <img style="width:30px;" src="{{item.url}}" /> {{item.name}}
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <input type="number" name="phone" class="form-control" id="n" placeholder="Enter your Phone Number" ng-model="user.PhoneNumber" required>
+                                </div>
+                            </div>
+
+                            <span style="color: red" ng-show="frm.phone.$dirty && frm.phone.$invalid">
+                                <span ng-show="frm.phone.$error.required">Phone Number is required.</span>
+                                <span ng-show="frm.phone.$error.number">Enter Valid Phone Number.</span>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="d">Designation: </label>
+                            <input type="text" name="designation" class="form-control" id="d" placeholder="Enter your Designation" ng-model="user.Designation" required>
+
+                            <span style="color: red" ng-show="frm.designation.$dirty && frm.designation.$invalid">
+                                <span ng-show="frm.designation.$error.required">Designation is required.</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="r">Role: </label>
+                            <select required class="form-control" name="role" id="r" ng-model="user.Role">
+                                <option ng-repeat="i in role" value="{{i.name}}">{{i.name}}</option>
+                            </select>
+                            <span style="color: red" ng-show="frm.role.$dirty && frm.role.$invalid">
+                                <span ng-show="frm.role.$error.required">Role is required.</span>
+                            </span>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" ng-disabled="!frm.$valid" ng-if="flguserbtn == true && flgemailbtn == true" class="btn btn-primary pull-right">{{Register}}</button>
+
+                        </div>
+                       
+                    </form>
+                   
+                </div>
+             
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div id="myModalRole" class="modal fade" tabindex="-1" data-replace="true" style="display: none; padding-left: 17px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header page-header navbar" style="max-height:52px; min-height:52px">
+                    <button type="button" class="close" data-dismiss="modal"><span> × </span></button>
+                    <h3 class="modal-title" style="color:black">
+                        <i class="fa fa-plus"></i> Add Roles
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form" ng-submit="saveRole()">
+                        <div class="form-group">
+                            <label class="form-label" for="NameR">Name: </label>
+                            <input type="text" class="form-control" id="NameR" placeholder="Add a new Role . . ." ng-model="Roles.Name">
+                            <button type="submit" class="btn btn-primary pull-right mg-t-fif"><i class="fa fa-plus"></i> Add Role</button>
+                        </div>
+                    </form>
+                    <hr />
+                    <div class="table-wrapper">
+                        <table id="tech-companies-1-clone" class="table table-small-font table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Roles</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="i in RolesList">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{i.name}}</td>
+                                    <td>
+                                        <a class="btn btn-primary" ng-click="EditRole(i.name)"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-danger" ng-click="Warning(i.name)"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModalA" class="modal fade" tabindex="-1" data-replace="true" style="display: none; padding-left: 17px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header page-header navbar" style="max-height:52px; min-height:52px">
+                    <button type="button" class="close" data-dismiss="modal"> <span> × </span> </button>
+                    <h3 class="modal-title" style="color:black">
+                        <i class="fa fa-plus"></i> Assign Rights
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form" ng-submit="save()">
+                        <div class="form-group">
+                            <label class="form-label" for="r">Role: </label>
+                            <select class="form-control" id="5r" ng-model="Roles.Id" ng-change="showRights()">
+                                <option ng-repeat="i in role" value="{{i.id}}">{{i.name}}</option>
+                            </select>
+                        </div>
+                        <hr />
+                        <div ng-if="flag == true">
+                            <h4>
+                                <strong><i class="fa fa-mail-forward"></i> Rights</strong>
+                            </h4>
+                            <hr />
+                            <div class="form-group check-form">
+                                <input type="checkbox" class="check_box" ng-change="brighSaveRights(1,Rights.dashBorad)" ng-model="Rights.dashBorad" /> <span style="vertical-align:super; font-weight:900;">Dashboard</span><br />
+                                <input type="checkbox" class="check_box" ng-change="brighSaveRights(2,Rights.userManager)" ng-model="Rights.userManager" /> <span style="vertical-align:super; font-weight:900;">User Management</span><br />
+                                <input type="checkbox" class="check_box" ng-change="brighSaveRights(19,Rights.adminBlog)" ng-model="Rights.adminBlog" /> <span style="vertical-align:super; font-weight:900;">Blog Management</span><br />
+                                <input type="checkbox" class="check_box" ng-change="brighSaveRights(20,Rights.marketingLibaray)" ng-model="Rights.marketingLibaray" /> <span style="vertical-align:super; font-weight:900;">Marketing Libaray</span><br />
+                                <input type="checkbox" class="check_box" ng-change="brighSaveRights(21,Rights.voucher)" ng-model="Rights.voucher" /> <span style="vertical-align:super; font-weight:900;">Vouchers Management</span><br />
+                                <input type="checkbox" class="check_box" ng-change="brighSaveRights(22,Rights.report)" ng-model="Rights.report" /> <span style="vertical-align:super; font-weight:900;">Reports</span><br />
+                                <input type="checkbox" class="check_box" ng-change="brighSaveRights(23,Rights.profile)" ng-model="Rights.profile" /> <span style="vertical-align:super; font-weight:900;">Profile</span><br />
+                                <input type="checkbox" class="check_box" ng-change="brighSaveRights(24,Rights.emailSubscription)" ng-model="Rights.emailSubscription" /> <span style="vertical-align:super; font-weight:900;">Email Preferences</span><br />
+
+                            </div>
+                            <hr />
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+@section SCRIPTS {
+    <script src="~/js/Angular/SomeOthers/sweetalert.js"></script>
+    <script src="~/js/AlertMsg/notify.js"></script>
+    <script src="~/js/Angular/SomeOthers/angular-animate.js"></script>
+    <script src="~/js/Angular/SomeOthers/angular-sanitize.js"></script>
+    <script src="~/js/Angular/SomeOthers/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="~/js/Angular/SomeOthers/datetime-picker.js"></script>
+    <script src="~/js/Angular/SomeOthers/underscore.js"></script>
+    <script src="~/js/Angular/SomeOthers/SweetAlert.min.js"></script>
+    <script src="~/js/Angular/SomeOthers/sweetalert.js"></script>
+    <script src="~/js/Angular/SomeOthers/ngMask.js"></script>
+    <script src="~/js/Angular/SomeOthers/scrutinyService.js"></script>
+    <script src="~/js/app-Controllers/Users.js"></script>
+    <script src="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.js"></script>
+    <script src="https://rawgit.com/michaelbromley/angularUtils-pagination/master/dirPagination.js"></script>
+}
+
+@section CSS{
+    <link href="~/js/AlertMsg/notify.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+
+
+}
+

@@ -1,0 +1,3 @@
+3/29/2022 9:34:52 PM ==> UserId:  Error: Unable to resolve service for type 'Azzuha.Services.Interface.v1.IGalleryService' while attempting to activate 'Azzuha.Apis.Controllers.v1.GalleryController'.
+3/29/2022 9:38:31 PM ==> UserId:  Error: Unable to resolve service for type 'Azzuha.Services.Interface.v1.IGalleryService' while attempting to activate 'Azzuha.Apis.Controllers.v1.GalleryController'.
+3/29/2022 9:44:00 PM ==> UserId:  Error: Unable to resolve service for type 'Azzuha.Services.Interface.v1.IGalleryService' while attempting to activate 'Azzuha.Apis.Controllers.v1.GalleryController'.

@@ -1,0 +1,2 @@
+7/21/2020 10:37:46 AM ==> UserId:  Error: Object reference not set to an instance of an object.
+7/21/2020 10:52:25 AM ==> UserId:  Error: FromSqlRaw or FromSqlInterpolated was called with non-composable SQL and with a query composing over it. Consider calling `AsEnumerable` after the FromSqlRaw or FromSqlInterpolated method to perform the composition on the client side.

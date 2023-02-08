@@ -1,0 +1,2 @@
+11/5/2020 1:50:08 PM ==> UserId:  Error: Object reference not set to an instance of an object.
+11/5/2020 1:50:46 PM ==> UserId:  Error: You cannot use a Stripe token more than once: tok_1Hk8b7E3gXs0tL8Z1YtHrwn9.

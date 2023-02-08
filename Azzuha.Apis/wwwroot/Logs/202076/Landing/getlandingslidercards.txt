@@ -1,0 +1,2 @@
+7/6/2020 12:09:21 PM ==> UserId:  Error: Set operations over different store types are currently unsupported
+7/6/2020 12:20:57 PM ==> UserId:  Error: Set operations over different store types are currently unsupported

@@ -1,0 +1,9 @@
+7/17/2020 12:12:47 PM ==> UserId:  Error: Error converting data type varchar to uniqueidentifier.
+7/17/2020 12:13:47 PM ==> UserId:  Error: Error converting data type varchar to uniqueidentifier.
+7/17/2020 12:14:47 PM ==> UserId:  Error: Error converting data type varchar to uniqueidentifier.
+7/17/2020 1:16:56 PM ==> UserId:  Error: Incorrect syntax near ', @Rating = '.
+Unclosed quotation mark after the character string '
+'.
+7/17/2020 1:18:05 PM ==> UserId:  Error: Incorrect syntax near ', @Rating = '.
+Unclosed quotation mark after the character string '
+'.

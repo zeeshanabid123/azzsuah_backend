@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Implementation\admin\Templates\**" />
+    <EmbeddedResource Remove="Implementation\admin\Templates\**" />
+    <None Remove="Implementation\admin\Templates\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="6.5.1" />
+    <PackageReference Include="MimeKit" Version="2.11.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RestSharp" Version="106.11.4" />
+    <PackageReference Include="Stripe.net" Version="37.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Azzuha.Common\Azzuha.Common.csproj" />
+    <ProjectReference Include="..\Azzuha.DataViewModels\Azzuha.DataViewModels.csproj" />
+    <ProjectReference Include="..\Azzuha.Data\Azzuha.Data.csproj" />
+  </ItemGroup>
+
+</Project>

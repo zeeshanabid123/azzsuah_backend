@@ -1,0 +1,113 @@
+﻿<div ng-controller="ClientReport">
+    <input type="hidden" value="true" id="P-ID" />
+    <div class="page-bar">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <a href="/Report/GetBlogFeedbackList">Client Report List</a>
+                    </li>
+                    <li>
+                        <span>Report</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <section class="box row" style="padding:15px;">
+            <div class="col-md-12">
+                <h2 style="margin:0;margin-bottom:20px;">
+                    Client Report List
+                </h2>
+            </div>
+            <div class="col-md-12 col-lg-8 col-xl-8">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 col-lg-3">
+                        <p class="input-group">
+                            <input type="text" readonly style="height: 38px; border-right: hidden;" class="form-control date" ng-change="findForwardedCases()" uib-datepicker-popup="{{format}}" ng-model="dateRang.str" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default date date-btn" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-3">
+                        <p class="input-group">
+                            <input type="text" readonly style="height: 38px; border-right: hidden;" class="form-control date" ng-change="findForwardedCases()" uib-datepicker-popup="{{format}}" ng-model="dateRang.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default date date-btn" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+
+                    </div>
+                    <div class="col-md-12">
+                        Total Records: {{forwardedPagination.TotalRecords}}
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <div class="search-bar-cntnr" style="margin-top:10px;margin-bottom:25px;">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="forwardedSearch" ng-change="findForwardedCases()" ng-model-options="{debounce: 400}" />
+                            <button class="search-btn"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12 col-lg-12 col-xl-12">
+                <div class="tab-pane active" id="fwdCases" role="tabpanel">
+
+                    <table class="table table-striped table-condensed table-bordered">
+                        <thead>
+                            <tr style="cursor:pointer;">
+                                <th><strong>Sr #</strong></th>
+                                <td ng-click="sortByForwardedCases(0)">
+                                    <strong>Name</strong>
+                                    <div ng-class="getClassForwardedCases(0)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(1)">
+                                    <strong>Month</strong>
+                                    <div ng-class="getClassForwardedCases(1)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td>
+                                    <strong>Report</strong>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="itm in forwardedCases">
+                                <td>
+                                    {{((forwardedPagination.Page - 1) * forwardedPagination.PageSize) + ($index+1)}}
+                                </td>
+                                <td> <a href="/UserProfile/Index?userId={{itm.userId}}&profileTypeId={{itm.profileTypeId}}">{{itm.name}}</a></td>
+                                <td>{{itm.month | date: 'MMMM yyyy'}}</td>
+                                <td>  <a href="{{itm.fileUrl}}" class="btn btn-info"><i class="fa fa-download" download> </i>&nbsp; Report</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul uib-pagination total-items="forwardedPagination.TotalRecords" ng-model="forwardedPagination.Page" items-per-page="forwardedPagination.PageSize" ng-change="loadForwardedCases()" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+@section SCRIPTS{
+    <script src="../js/AlertMsg/notify.js"></script>
+    <script src="../js/Angular/SomeOthers/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="../js/Angular/SomeOthers/underscore.js"></script>
+    <script src="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.js"></script>
+    <script src="../js/Angular/SomeOthers/commonService.js"></script>
+    <script src="../js/app-Controllers/AppFactory.js"></script>
+    <script src="~/js/app-Controllers/ClientReport.js"></script>
+}
+
+
+@section CSS{
+    <link href="../js/AlertMsg/notify.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+}
+
+

@@ -1,0 +1,266 @@
+﻿p-0{padding:0;}
+a, button {
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+a, .btn.dark:hover,
+a:hover{
+    color: #29AF36;
+}
+.btn-default.date-btn:hover {
+    background-color: #29AF36;
+    color: white;
+}
+.btn-info,
+.btn-info:hover {
+    background-color: #29AF36;
+    color: white;
+    border-color: #29AF36;
+}
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle,
+.btn-info.focus, .btn-info:focus,
+.btn-primary.focus, .btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle,
+.btn-info:not(:disabled):not(.disabled).active {
+    background: #29AF36;
+    border-color: #29AF36;
+}
+.form-control:focus,
+input:focus {
+    box-shadow: unset;
+    border-color: unset;
+}
+.text-info {
+    color: #29AF36 !important;
+}
+.btn-info:not(:disabled):not(.disabled).active .text-info {
+    color: #fff !important;
+}
+/* Btn */
+.btn-primary {
+    background: white;
+    border: 2px solid #29AF36;
+    color: #29AF36;
+}
+.btn-primary:hover {
+    background: #29AF36;
+    color: white;
+    border: 2px solid #29AF36;
+}
+.btn-default {border: 2px solid #dddddd;}
+.btn-container {margin-bottom: 15px;}
+.btn-container button {margin-right: 15px;}
+.btn-default.date-btn {border:1px solid #ddd;border-radius:0 3px 3px 0;}
+/* Btn */
+/* Modal */
+.modal-header .close {
+    padding: 1rem;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #000;
+}
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+/* Modal */
+
+/* BreadCrum */
+.page-breadcrumb{padding-left:0;display:inline-block;width:100%;}
+.page-breadcrumb li {
+    display: inline-block;
+    position:relative;
+    float: left;
+    margin-right: 20px;
+}
+.page-breadcrumb li:not(:first-child):before {
+    position: absolute;
+    left: -12px;
+    top: 0px;
+    content: "/";
+    font-size: 16px;
+    color: #212529;
+}
+/* BreadCrum */
+
+/* Pagination */
+.pagination-sm,
+.pagination {
+    padding-left: 0;
+    display: inline-block;
+    width: 100%;
+}
+.pagination-sm li,
+.pagination li{
+    padding-left: 0;
+    display: inline-block;
+    float:left;
+    margin-right:10px;
+}
+.pagination-sm li a,
+.pagination li a{
+    border: 1px solid #333333;
+    padding: 3px 15px 4px 15px;
+    border-radius: 4px;
+    color:#333333;
+}
+.pagination li a.active,
+.pagination li.active a,
+.pagination li a:hover,
+.pagination-sm li a:hover{
+    color:white;
+    background:#29AF36;
+    border-color:#29AF36;
+}
+/* Pagination */
+.mg-t-fif {
+    margin-top: 15px;
+}
+.info-box .info-box-icon {
+    font-size: 16px;
+}
+.swal2-popup .swal2-styled.swal2-confirm {
+    background-color: #29AF36 !important;
+}
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: #29AF36;
+}
+.search-bar-cntnr{
+    display:inline-block;
+    width:100%;
+}
+.search-bar-cntnr input{
+    width:calc(100% - 40px);
+    float:left;
+    border-radius: 3px 0 0 3px;
+    border-right: 0;
+}
+.search-bar-cntnr input:focus,
+.search-bar-cntnr input.form-control:focus{
+       border-color:#ced4da;
+}
+.search-bar-cntnr button{
+    width: 40px;
+    height:38px;
+    float: left;
+    border:hidden;
+    background-color:#fff;
+    border-radius: 0px 3px 3px 0px;
+    border:1px solid #ced4da;
+    border-left:0;
+}
+.search-bar-cntnr button:hover{
+    color:white;
+    background:#29AF36;
+}
+.card-primary.card-outline {
+    border-top: 3px solid #29AF36;
+}
+.user-block .username{margin-left:0;}
+#Messages .user-block .username {
+    margin-left: 50px;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #29AF36;
+}
+.nav-pills .nav-link:not(.active):hover {
+    color: #29AF36;
+}
+.timeline-item h3.timeline-header a {
+    color: #333333;
+    font-weight:bold;
+}
+.timeline-body{margin-bottom:20px;}
+.timeline-body a{
+    margin-right:10px;margin-bottom:15px;
+}
+#accordion .card .card-header {
+    background: #29AF36;
+}
+#accordion .card .card-body .card-header {
+    background: transparent;
+    margin-bottom:15px;
+    padding-left:0; 
+}
+#accordion .card button.btn.btn-link{
+    padding:0;
+}
+#accordion .card button.btn.btn-link .card-header{
+       color:white;
+}
+.custom-control{
+    margin-bottom:7px;
+}
+.custom-control-input,
+.custom-control-label {
+    cursor: pointer;
+}
+.custom-control-input:checked ~ .custom-control-label::before{
+    border-color: #29AF36;
+background-color: #29AF36;
+}
+h3.profile-username{
+    color:#000000;
+    font-weight:bold;
+    margin-top:15px;
+    margin-bottom:0;
+}
+.card-body.box-profile .text-center .profile-user-img.img-circle {
+    border-radius:0;
+    border:none;
+    padding:0;
+    width:auto;
+    max-height:120px;
+}
+#fwdCases tbody .btn.btn-warning {
+    margin-bottom:10px;
+}
+.custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
+       background-color: rgba(41,175,54,.5);
+}
+.nav-sidebar li .ng-pristine button.nav-link {
+    margin-left: 20px;
+    margin-top: 10px;
+    color: white;
+    border-color: #FFC013;
+    color: #FFC013;
+    background-color: transparent;
+    text-transform: capitalize;
+    fotn-size: 14px;
+}
+.nav-sidebar li .ng-pristine button.nav-link:hover{
+    color:white;
+    background-color: #FFC013;
+}
+.form-group.check-form input{
+    position:relative;
+    top:-8px;
+    margin-right:5px;
+}
+#loader {
+    padding-top: 45vh;
+    padding-left: 45%;
+}
+.profile-detail-list li b {
+    display: inline-block;
+    width: 100%;
+}
+.profile-detail-list li:not(:last-child){
+    padding-bottom:0;
+}
+.brand-image.img-circle {
+    border-radius: 0;
+    box-shadow:0 !important;
+}
+.brand-image.img-circle.elevation-3{
+    box-shadow:0 !important;
+}
+
+

@@ -1,0 +1,2 @@
+8/6/2020 6:00:55 AM ==> UserId:  Error: When called from 'VisitLambda', rewriting a node of type 'System.Linq.Expressions.ParameterExpression' must return a non-null value of the same type. Alternatively, override 'VisitLambda' and change it to not visit children of this type.
+8/6/2020 6:44:01 AM ==> UserId:  Error: A transport-level error has occurred when receiving results from the server. (provider: Session Provider, error: 19 - Physical connection is not usable)

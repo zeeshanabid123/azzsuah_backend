@@ -1,0 +1,184 @@
+﻿<div ng-controller="TrainerList">
+    <input type="hidden" value="93151A05-220F-4A58-95B2-207598B9BAEB" id="P-ID" />
+    <div class="page-bar">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <a href="/Profile/GetGymList">Gym List</a>
+
+                    </li>
+                    <li>
+                        <span>List</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <section class="box row" style="padding:15px;">
+            <div class="col-md-12">
+                <h2 style="margin:0;margin-bottom:20px;">
+                    Gym Users
+                </h2>
+            </div>
+            <hr />
+            <div class="col-md-12 col-lg-8 col-xl-8">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 col-lg-3">
+                        <p class="input-group">
+                            <input type="text" readonly style="height: 38px; border-right: hidden;" class="form-control date" ng-change="findForwardedCases()" uib-datepicker-popup="{{format}}" ng-model="dateRang.str" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default date date-btn" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-3">
+                        <p class="input-group">
+                            <input type="text" readonly style="height: 38px; border-right: hidden;" class="form-control date" ng-change="findForwardedCases()" uib-datepicker-popup="{{format}}" ng-model="dateRang.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default date date-btn" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-3">
+                        <p class="input-group">
+                            <a class="btn btn-success" href="/Profile/export?profileTypeId={{profileTypeId}}">Export To Excel</a>
+                        </p>
+                    </div>
+                    <div class="col-md-12">
+                        Total Records: {{forwardedPagination.TotalRecords}}
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <div class="search-bar-cntnr" style="margin-top:10px;margin-bottom:25px;">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="forwardedSearch" ng-change="findForwardedCases()" ng-model-options="{debounce: 400}" />
+                            <button class="search-btn"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-12 col-xl-12">
+                <div class="tab-pane active" style="overflow-x:scroll;width:100%;max-height:500px;" id="fwdCases" role="tabpanel">
+
+                    <table class="table table-striped table-condensed table-bordered">
+                        <thead>
+                            <tr style="cursor:pointer;">
+                                <th><strong>Sr #</strong></th>
+                                <td ng-click="sortByForwardedCases(0)">
+                                    <strong>Date</strong>
+                                    <div ng-class="getClassForwardedCases(0)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(1)">
+                                    <strong>Gym</strong>
+                                    <div ng-class="getClassForwardedCases(1)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td>
+                                    <strong>Location</strong>
+                                </td>
+                                <td ng-click="sortByForwardedCases(3)">
+                                    <strong>AverageHourlyPrice</strong> <div ng-class="getClassForwardedCases(3)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(4)">
+                                    <strong>NumberOfMarketingMaterials</strong> <div ng-class="getClassForwardedCases(4)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(5)">
+                                    <strong>NumberOfViews</strong> <div ng-class="getClassForwardedCases(5)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(6)">
+                                    <strong>NumberOfMessages</strong> <div ng-class="getClassForwardedCases(6)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(7)">
+                                    <strong>NumberOfLikes</strong> <div ng-class="getClassForwardedCases(7)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(8)">
+                                    <strong>Fee</strong> <div ng-class="getClassForwardedCases(8)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(9)">
+                                    <strong>SubscriptionTerm</strong> <div ng-class="getClassForwardedCases(9)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td>
+                                    <strong>Action</strong>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="itm in forwardedCases">
+                                <td>
+                                    {{((forwardedPagination.Page - 1) * forwardedPagination.PageSize) + ($index+1)}}
+                                </td>
+                                <td>{{itm.date | date: 'dd/MM/yyyy hh:mm:ss a'}}</td>
+                                <td> <a href="/UserProfile/Index?userId={{itm.userId}}&profileTypeId=93151A05-220F-4A58-95B2-207598B9BAEB">{{itm.name}}</a></td>
+                                <td> <span ng-repeat="list in itm.location">{{list}} | </span></td>
+                                <td>{{itm.averageHourlyPrice}}</td>
+                                <td>{{itm.numberOfMarketingMaterials}}</td>
+                                <td>{{itm.numberOfViews}}</td>
+                                <td>{{itm.numberOfMessages}}</td>
+                                <td>{{itm.numberOfLikes}}</td>
+                                <td>{{itm.fee}}</td>
+                                <td>{{itm.subscriptionTerm}}</td>
+                                <td>
+                                    <a ng-click="showDetail(itm)" class="btn btn-warning">Detail</a>
+                                    <a href="/UserProfile/Index?userId={{itm.userId}}&profileTypeId=93151A05-220F-4A58-95B2-207598B9BAEB" class="btn btn-info">user profile</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <ul style="margin-top:20px;" uib-pagination total-items="forwardedPagination.TotalRecords" ng-model="forwardedPagination.Page" items-per-page="forwardedPagination.PageSize" ng-change="loadForwardedCases()" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal fade in" id="show-detail-modal" padding-right: 13px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Record Detail</h4>
+                </div>
+                <div class="modal-body">
+                    Date: <div>{{recordDetail.date | date: 'dd/MM/yyyy hh:mm:ss a'}}</div>
+                    Gym: <div>{{recordDetail.name}}</div>
+                    AverageHourlyPrice: <div>{{recordDetail.averageHourlyPrice}}</div>
+                    NumberOfMarketingMaterials : <div>{{recordDetail.numberOfMarketingMaterials}}</div>
+                    NumberOfViews: <div>{{recordDetail.numberOfViews}}</div>
+                    NumberOfMessages: <div>{{recordDetail.numberOfMessages}}</div>
+                    NumberOfLikes: <div>{{recordDetail.numberOfLikes}}</div>
+                    Fee: <div>{{recordDetail.fee}}</div>
+                    SubscriptionTerm: <div>{{recordDetail.subscriptionTerm}}</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+
+
+
+@section SCRIPTS{
+    <script src="../js/AlertMsg/notify.js"></script>
+    <script src="../js/Angular/SomeOthers/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="../js/Angular/SomeOthers/underscore.js"></script>
+    <script src="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.js"></script>
+    <script src="../js/Angular/SomeOthers/commonService.js"></script>
+    <script src="../js/app-Controllers/AppFactory.js"></script>
+    <script src="../js/app-Controllers/TrainerList.js"></script>
+}
+
+
+@section CSS{
+    <link href="../js/AlertMsg/notify.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+}
+
+

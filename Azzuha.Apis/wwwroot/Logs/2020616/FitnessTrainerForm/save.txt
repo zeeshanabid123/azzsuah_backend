@@ -1,0 +1,7 @@
+6/16/2020 1:25:14 PM ==> UserId:  Error: Invalid email address: hahn.hah.y3j
+6/16/2020 1:26:18 PM ==> UserId:  Error: Invalid email address: hahn.hah.y3j
+6/16/2020 1:28:02 PM ==> UserId:  Error: Your card was declined. Your request was in test mode, but used a non test (live) card. For a list of valid test cards, visit: https://stripe.com/docs/testing.
+6/16/2020 1:29:24 PM ==> UserId:  Error: Your card was declined. Your request was in test mode, but used a non test (live) card. For a list of valid test cards, visit: https://stripe.com/docs/testing.
+6/16/2020 1:30:45 PM ==> UserId:  Error: You cannot use a Stripe token more than once: tok_1Guer4E3gXs0tL8ZxwYctLxZ.
+6/16/2020 1:32:08 PM ==> UserId:  Error: You cannot use a Stripe token more than once: tok_1GuesgE3gXs0tL8Znu7mMV2v.
+6/16/2020 1:32:49 PM ==> UserId:  Error: You cannot use a Stripe token more than once: tok_1GuesgE3gXs0tL8Znu7mMV2v.

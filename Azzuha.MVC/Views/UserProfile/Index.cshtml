@@ -1,0 +1,1091 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+
+
+
+<div class="row" ng-controller="AdminUserProfile">
+    <span ng-init="init('@ViewBag.userId','@ViewBag.profileTypeId')"></span>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Profiles</h3>
+            </div>
+            <!-- /.card-header -->
+            <!--Trainner profile-->
+            <div class="card-body" ng-if="profileTypeId==='0f558698-b929-4519-8e33-f978884933c1'">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle" src="{{detail.personal.imageUrl}}" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">{{detail.personal.name}}</h3>
+
+                                    <p class="text-muted text-center">{{detail.personal.email}}</p>
+
+                                    <ul class="list-group list-group-unbordered mb-3 profile-detail-list">
+                                        <li class="list-group-item">
+                                            <b>Gender</b> <a>{{detail.personal.gender}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Experience</b> <a>{{detail.personal.experience}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>dateOfBirth</b> <a>{{detail.personal.dateOfBirth | date:'M-d-yyyy'}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Billing Address</b> <a>{{detail.personal.billingAddress}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>City/State</b> <a>{{detail.personal.cityState}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Phone Number</b> <a>{{detail.personal.phoneNumber}}</a>
+                                        </li>
+                                    </ul>
+
+                                    <a href="#" data-toggle="modal" data-target="#modal-lg" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Personal Information</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#Messages" data-toggle="tab">Messages</a></li>
+
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="activity">
+                                            <!-- Post -->
+                                            <div class="post">
+                                                <div class="user-block">
+                                                    <span class="username">
+                                                        <a href="#">BIO</a>
+                                                    </span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{detail.personal.bio}}
+                                                </p>
+
+
+                                            </div>
+                                            <!-- /.post -->
+                                            <!-- Post -->
+                                            <div class="post clearfix">
+                                                <div class="user-block">
+                                                    <span class="username">
+                                                        <a href="#">Qualification</a>
+                                                    </span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{detail.personal.qualification}}
+                                                </p>
+
+
+                                            </div>
+                                            <!-- /.post -->
+                                            <!-- Post -->
+                                            <!-- /.post -->
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="timeline">
+                                            <!-- The timeline -->
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Expertise</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.expertise">{{data}}</a>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Services</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.services">{{data}}</a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!-- /.tab-pane -->
+
+                                        <div class="tab-pane" id="settings">
+                                            <form class="form-horizontal">
+                                                <ul style="width:100%;margin:0;padding-left:0;display:inline-block;" ng-repeat="data in detail.price" ng-if="data.isPackage==true">
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>Trainner Service</b>
+                                                        <p>{{data.trainnerService}}</p>
+                                                    </li>
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>Number Of Session</b>
+                                                        <p>{{data.numberOfSession}}</p>
+                                                    </li>
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>Price</b>
+                                                        <p>{{data.price}}</p>
+                                                    </li>
+                                                </ul>
+                                                <ul style="width:100%;margin:0;padding-left:0;display:inline-block;" ng-repeat="data in detail.price" ng-if="data.isPackage==false">
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>Frequency</b>
+                                                        <p>{{data.frequency}}</p>
+                                                    </li>
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>Trainner Service</b>
+                                                        <p>{{data.trainnerService}}</p>
+                                                    </li>
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>Price</b>
+                                                        <p>{{data.price}}</p>
+                                                    </li>
+                                                    @*<li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>Number Of Session</b>
+                                                        <p>{{data.numberOfSession}}</p>
+                                                    </li>*@
+                                                </ul>
+                                                <ul style="width:100%;margin:0;padding-left:0;display:inline-block;">
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>Day</b>
+                                                        <p ng-repeat="data in detail.calender">{{data.day}}</p>
+                                                    </li>
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>Start Time</b>
+                                                        <p ng-repeat="data in detail.calender">{{data.startTime}}</p>
+                                                    </li>
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>End Time</b>
+                                                        <p ng-repeat="data in detail.calender">{{data.endTime}}</p>
+                                                    </li>
+                                                    <li style="width:25%;margin:0;padding-left:0;float:left;display:inline-block">
+                                                        <b>GMT</b>
+                                                        <p ng-repeat="data in detail.calender">{{data.gmt}}</p>
+                                                    </li>
+                                                </ul>
+                                                @*<table style="width:100%">
+            <tr>
+                <th>Trainner Service</th>
+                <th>numberOfSession</th>
+                <th>price</th>
+
+                <th></th>
+            </tr>
+            <tr ng-repeat="data in detail.price" ng-if="data.isPackage==true">
+                <td>{{data.trainnerService}}</td>
+                <td>{{data.numberOfSession}}</td>
+                <td>{{data.price}}</td>
+
+                <td></td>
+            </tr>
+
+        </table>
+
+        <table style="width:100%">
+            <tr>
+                <th>Frequency</th>
+                <th>Trainner Service</th>
+                <th>price</th>
+                <th>numberOfSession</th>
+            </tr>
+            <tr ng-repeat="data in detail.price" ng-if="data.isPackage==false">
+                <td>{{data.frequency}}</td>
+                <td>{{data.trainnerService}}</td>
+                <td>{{data.price}}</td>
+                <td>{{data.numberOfSession}}</td>
+            </tr>
+
+        </table>
+
+
+        <table style="width:100%">
+            <tr>
+                <th>Day</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>GMT</th>
+            </tr>
+            <tr ng-repeat="data in detail.calender">
+                <td>{{data.day}}</td>
+                <td>{{data.startTime}}</td>
+                <td>{{data.endTime}}</td>
+                <td>{{data.gmt}}</td>
+            </tr>
+
+        </table>*@
+                                            </form>
+                                        </div>
+
+                                        <div class="tab-pane" id="Messages">
+                                            <div class="post" ng-repeat=" thread in allthread">
+                                                <div class="user-block">
+                                                    <img class="img-circle img-bordered-sm" src="{{thread.profilepic}}" alt="user image">
+                                                    <span class="username">
+                                                        <a href="#" ng-click="GetAllMessageofUser(thread.threadid,thread.friendid)">{{thread.fullname}}</a>
+                                                        @*<a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>*@
+                                                    </span>
+                                                    <span class="description">Shared publicly - {{thread.lastmessagetime | date: 'HH:mm:ss'}} </span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{thread.lastmessage}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+            <!-- /.card-header -->
+            <!--Gym Profile-->
+            <div class="card-body" ng-if="profileTypeId==='93151a05-220f-4a58-95b2-207598b9baeb'">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle" src="{{detail.personal.imageUrl}}" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">{{detail.personal.businessLegalName}}</h3>
+
+                                    <p class="text-muted text-center">{{detail.personal.email}}</p>
+
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Contact Name</b> <a class="float-right">{{detail.personal.contactName}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Website Url</b> <a class="float-right" href="{{detail.personal.websiteUrl}}" target="_blank">Click here</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Gym Name</b> <a class="float-right">{{detail.personal.gymName}}</a>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <b>Phone Number</b> <a class="float-right">{{detail.personal.phoneNumber}}</a>
+                                        </li>
+                                    </ul>
+
+                                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Personal Information</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#Messages" data-toggle="tab">Messages</a></li>
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="activity">
+                                            <!-- Post -->
+                                            <div class="post">
+                                                <div class="user-block">
+                                                    <span class="username">
+                                                        <a href="#">Description</a>
+                                                    </span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{detail.personal.description}}
+                                                </p>
+
+
+                                            </div>
+                                            <!-- /.post -->
+                                            <!-- Post -->
+                                            <!-- /.post -->
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="timeline">
+                                            <!-- The timeline -->
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Amenities</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.amenities">{{data}}</a>
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.otherAmenities">{{data}}</a>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Locations</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.location">{{data.loc}}</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+
+                                        <div class="tab-pane" id="settings">
+                                            <form class="form-horizontal">
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        <th>Days</th>
+                                                        <th>startTime</th>
+                                                        <th>endTime</th>
+                                                        <th>GMT</th>
+                                                    </tr>
+
+                                                    <tr ng-repeat="data in detail.calender">
+                                                        <td>{{data.day}}</td>
+                                                        <td>{{data.startTime}}</td>
+                                                        <td>{{data.endTime}}</td>
+                                                        <td>{{data.gmt}}</td>
+                                                    </tr>
+
+                                                </table>
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        <th>Frequency</th>
+                                                        <th>Price</th>
+
+                                                    </tr>
+
+                                                    <tr ng-repeat="data in detail.price">
+                                                        <td>{{data.frequency}}</td>
+                                                        <td>{{data.price}}</td>
+                                                    </tr>
+
+                                                </table>
+                                            </form>
+                                        </div>
+
+
+
+                                        <div class="tab-pane" id="Messages">
+                                            <div class="post" ng-repeat=" thread in allthread">
+                                                <div class="user-block">
+                                                    <img class="img-circle img-bordered-sm" src="{{thread.profilepic}}" alt="user image">
+                                                    <span class="username">
+                                                        <a href="#">{{thread.fullname}}</a>
+                                                        @*<a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>*@
+                                                    </span>
+                                                    <span class="description">Shared publicly - {{thread.lastmessagetime | date: 'HH:mm:ss'}} today</span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{thread.lastmessage}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+            <!--Fitness Class Profile-->
+            <div class="card-body" ng-if="profileTypeId==='dc83aa84-9d16-48bf-9538-bb6a5a242409'">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle" src="{{detail.personal.imageUrl}}" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">{{detail.personal.businessLegalName}}</h3>
+
+                                    <p class="text-muted text-center">{{detail.personal.email}}</p>
+
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Contact Name</b> <a class="float-right">{{detail.personal.contactName}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Class URL</b> <a class="float-right" target="_blank" href="{{detail.personal.classURL}}">Click here</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Business Address</b> <a class="float-right">{{detail.personal.businessAddress}}</a>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <b>Phone Number</b> <a class="float-right">{{detail.personal.phoneNumber}}</a>
+                                        </li>
+                                    </ul>
+
+                                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Personal Information</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#Messages" data-toggle="tab">Messages</a></li>
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="activity">
+                                            <!-- Post -->
+                                            <div class="post">
+                                                <div class="user-block">
+                                                    <span class="username">
+                                                        <a href="#">Description</a>
+                                                    </span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{detail.personal.description}}
+                                                </p>
+
+
+                                            </div>
+                                            <!-- /.post -->
+                                            <!-- Post -->
+                                            <!-- /.post -->
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="timeline">
+                                            <!-- The timeline -->
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Services</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.services">{{data}}</a>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">WorkOut</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.workOut">{{data}}</a>
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.otherWorkouts">{{data}}</a>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Location</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.location">{{data.loc}}</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+
+                                        <div class="tab-pane" id="settings">
+                                            <form class="form-horizontal">
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        <th>Day</th>
+                                                        <th>startTime</th>
+                                                        <th>endTime</th>
+                                                    </tr>
+
+                                                    <tr ng-repeat="data in detail.calender">
+                                                        <td>{{data.day}}</td>
+                                                        <td>{{data.startTime}}</td>
+                                                        <td>{{data.endTime}}</td>
+
+                                                    </tr>
+
+                                                </table>
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        <th>Class Service</th>
+                                                        <th>Frequency</th>
+                                                        <th>Number Of Classes</th>
+                                                        <th>Price</th>
+                                                    </tr>
+
+                                                    <tr ng-repeat="data in detail.price">
+                                                        <td>{{data.classService}}</td>
+                                                        <td>{{data.frequency}}</td>
+                                                        <td>{{data.numberOfClasses}}</td>
+                                                        <td>{{data.price}}</td>
+                                                    </tr>
+
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="Messages">
+                                            <div class="post" ng-repeat=" thread in allthread">
+                                                <div class="user-block">
+                                                    <img class="img-circle img-bordered-sm" src="{{thread.profilepic}}" alt="user image">
+                                                    <span class="username">
+                                                        <a href="#">{{thread.fullname}}</a>
+                                                        @*<a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>*@
+                                                    </span>
+                                                    <span class="description">Shared publicly - {{thread.lastmessagetime | date: 'HH:mm:ss'}} today</span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{thread.lastmessage}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!--Fitness food and nutration Profile-->
+            <div class="card-body" ng-if="profileTypeId==='3458e7a8-62e3-4634-a52c-5cbd0932a6b4'">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle" src="{{detail.personal.imageUrl}}" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">{{detail.personal.businessLegalName}}</h3>
+
+                                    <p class="text-muted text-center">{{detail.personal.email}}</p>
+
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Contact Name</b> <a class="float-right">{{detail.personal.contactName}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Android App URL</b> <a class="float-right" href="{{detail.personal.androidAppURL}}" target="_blank"> Click here</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>IOS App URL</b> <a class="float-right" href="{{detail.personal.iosAppURL}}" target="_blank">Click here</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>App Name</b> <a class="float-right">{{detail.personal.appName}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Business Address</b> <a class="float-right">{{detail.personal.businessAddress}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Phone Number</b> <a class="float-right">{{detail.personal.phoneNumber}}</a>
+                                        </li>
+                                    </ul>
+
+                                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Personal Information</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#Messages" data-toggle="tab">Messages</a></li>
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="activity">
+                                            <!-- Post -->
+                                            <div class="post">
+                                                <div class="user-block">
+                                                    <span class="username">
+                                                        <a href="#">Description</a>
+                                                    </span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{detail.personal.description}}
+                                                </p>
+
+
+                                            </div>
+                                            <!-- /.post -->
+                                            <!-- Post -->
+                                            <!-- /.post -->
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="timeline">
+                                            <!-- The timeline -->
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Services</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.services">{{data}}</a>
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.otherServices">{{data}}</a>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Allergies</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.allergies">{{data}}</a>
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.otherAllergies">{{data}}</a>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Diets</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.diets">{{data}}</a>
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.otherDiets">{{data}}</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+
+                                        <div class="tab-pane" id="settings">
+                                            <form class="form-horizontal">
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        <th>Frequency</th>
+                                                        <th>Price</th>
+                                                    </tr>
+
+                                                    <tr ng-repeat="data in detail.prices">
+
+                                                        <td>{{data.frequency}}</td>
+                                                        <td>{{data.price}}</td>
+                                                    </tr>
+
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <div class="tab-pane" id="Messages">
+                                            <div class="post" ng-repeat=" thread in allthread">
+                                                <div class="user-block">
+                                                    <img class="img-circle img-bordered-sm" src="{{thread.profilepic}}" alt="user image">
+                                                    <span class="username">
+                                                        <a href="#">{{thread.fullname}}</a>
+                                                        @*<a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>*@
+                                                    </span>
+                                                    <span class="description">Shared publicly - {{thread.lastmessagetime | date: 'HH:mm:ss'}} today</span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{thread.lastmessage}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Cutomer Profile-->
+            <div class="card-body" ng-if="profileTypeId==='f59a5a9e-c4fd-4398-8364-322894139533'">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle" src="{{detail.personal.imageUrl}}" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">{{detail.personal.businessLegalName}}</h3>
+
+                                    <p class="text-muted text-center">{{detail.personal.email}}</p>
+
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Billing Address</b> <a class="float-right">{{detail.personal.billingAddress}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>City State</b> <a class="float-right">{{detail.personal.cityState}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>DOB</b> <a class="float-right">{{detail.personal.dob | date:'M-d-yyyy'}}</a>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <b>Gender</b> <a class="float-right">{{detail.personal.gender}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Name</b> <a class="float-right">{{detail.personal.name}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>PhoneNumber</b> <a class="float-right">{{detail.personal.phoneNumber}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Zip Code</b> <a class="float-right">{{detail.personal.zipCode}}</a>
+                                        </li>
+                                    </ul>
+
+                                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Personal Information</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#Messages" data-toggle="tab">Messages</a></li>
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="activity">
+                                            <!-- Post -->
+                                            <div class="post">
+                                                <div class="user-block">
+                                                    <span class="username">
+                                                        <a href="#">Description</a>
+                                                    </span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{detail.personal.description}}
+
+                                                    There is no Description
+                                                </p>
+
+
+                                            </div>
+                                            <!-- /.post -->
+                                            <!-- Post -->
+                                            <!-- /.post -->
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="timeline">
+                                            <!-- The timeline -->
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Workouts</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.workouts">{{data}}</a>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Services</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.services">{{data}}</a>
+                                                </div>
+
+                                            </div>
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Channels</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.channels">{{data}}</a>
+                                                </div>
+
+                                            </div>
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Naf</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.naf">{{data}}</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="Messages">
+                                            <div class="post" ng-repeat=" thread in allthread">
+                                                <div class="user-block">
+                                                    <img class="img-circle img-bordered-sm" src="{{thread.profilepic}}" alt="user image">
+                                                    <span class="username">
+                                                        <a href="#" ng-click="GetAllMessageofUser(thread.threadid,thread.friendid)">{{thread.fullname}}</a>
+                                                        @*<a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>*@
+                                                    </span>
+                                                    <span class="description">Shared publicly - {{thread.lastmessagetime | date: 'HH:mm:ss'}} today</span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{thread.lastmessage}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <!--FitnessApp Profile-->
+            <div class="card-body" ng-if="profileTypeId==='dc7415f0-c10d-4cbe-b5c1-ab9e62fcbd6c'">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle" src="{{detail.personal.imageUrl}}" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">{{detail.personal.businessLegalName}}</h3>
+
+                                    <p class="text-muted text-center">{{detail.personal.email}}</p>
+
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Contact Name</b> <a class="float-right">{{detail.personal.contactName}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Android App URL </b> <a class="float-right" href="{{detail.personal.androidAppURL}}" target="_blank">Click here</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Ios App URL</b> <a class="float-right" href="{{detail.personal.iosAppURL}}" target="_blank">Click here</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>App Name</b> <a class="float-right">{{detail.personal.appName}}</a>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <b>Business Address</b> <a class="float-right">{{detail.personal.businessAddress}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Phone Number</b> <a class="float-right">{{detail.personal.phoneNumber}}</a>
+                                        </li>
+                                    </ul>
+
+                                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Personal Information</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#Messages" data-toggle="tab">Messages</a></li>
+                                    </ul>
+                                </div><!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="activity">
+                                            <!-- Post -->
+                                            <div class="post" ng-if="">
+                                                <div class="user-block">
+                                                    <span class="username">
+                                                        <a href="#">Description</a>
+                                                    </span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{detail.personal.description}}
+                                                </p>
+
+
+                                            </div>
+                                            <!-- /.post -->
+                                            <!-- Post -->
+                                            <!-- /.post -->
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="timeline">
+                                            <!-- The timeline -->
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Services</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.services">{{data}}</a>
+                                                </div>
+
+                                            </div>
+                                            <div class="timeline-item">
+
+                                                <h3 class="timeline-header"><a href="#">Workouts</a> </h3>
+
+                                                <div class="timeline-body">
+                                                    <a href="#" class="btn btn-primary btn-sm" ng-repeat="data in detail.workouts">{{data}}</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+
+                                        <div class="tab-pane" id="settings">
+                                            <form class="form-horizontal">
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        <th>Frequency</th>
+                                                        <th>Price</th>
+                                                    </tr>
+
+                                                    <tr ng-repeat="data in detail.prices">
+
+                                                        <td>{{data.frequency}}</td>
+                                                        <td>{{data.price}}</td>
+                                                    </tr>
+
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <div class="tab-pane" id="Messages">
+                                            <div class="post" ng-repeat=" thread in allthread">
+                                                <div class="user-block">
+                                                    <img class="img-circle img-bordered-sm" src="{{thread.profilepic}}" alt="user image">
+                                                    <span class="username">
+                                                        <a href="#" ng-click="GetAllMessageofUser(thread.threadid,thread.friendid)">{{thread.fullname}}</a>
+                                                    </span>
+                                                    <span class="description">Shared publicly - {{thread.lastmessagetime | date: 'HH:mm:ss'}} today</span>
+                                                </div>
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    {{thread.lastmessage}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div><!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+    <div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">All Messages</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="post" ng-repeat="msg in allmessages">
+                        <div class="user-block">
+
+                            <span class="description">Shared publicly - {{msg.sentTime | date: 'HH:mm:ss'}}  </span>
+                        </div>
+                        <!-- /.user-block -->
+                        <p ng-if="msg.messageTypeId===1">
+                            {{msg.message.split(',')[0] }}
+                        </p>
+                        <p ng-if="msg.messageTypeId===2">
+                            <img src="{{msg.message.split(',')[0]}}" height="50" width="50"  />
+                        </p>
+                        <p ng-if="msg.messageTypeId===3">
+                            <img src="{{msg.message.split(',')[0]}}" height="50" width="50" />
+                        </p>
+
+                    </div>
+                </div>
+              
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+@section SCRIPTS {
+    <script src="~/js/Angular/SomeOthers/sweetalert.js"></script>
+    <script src="~/js/AlertMsg/notify.js"></script>
+    <script src="~/js/Angular/SomeOthers/angular-animate.js"></script>
+    <script src="~/js/Angular/SomeOthers/angular-sanitize.js"></script>
+    <script src="~/js/Angular/SomeOthers/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="~/js/Angular/SomeOthers/datetime-picker.js"></script>
+    <script src="~/js/Angular/SomeOthers/underscore.js"></script>
+    <script src="~/js/Angular/SomeOthers/SweetAlert.min.js"></script>
+    <script src="~/js/Angular/SomeOthers/sweetalert.js"></script>
+    <script src="~/js/Angular/SomeOthers/ngMask.js"></script>
+    <script src="../js/Angular/SomeOthers/commonService.js"></script>
+    <script src="~/js/app-Controllers/AdminUserProfile.js"></script>
+    <script src="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.js"></script>
+}
+
+@section CSS{
+    <link href="~/js/AlertMsg/notify.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+
+
+}
+
+

@@ -1,0 +1,172 @@
+﻿<div ng-controller="EmailSubscriptions">
+    <div class="page-bar">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <ul class="page-breadcrumb">
+                    <li>
+                        <a href="/EmailSubscriptions/index">Email Subscriptions</a>
+                    </li>
+                    <li>
+                        <span>Email Subscription Feedbacks</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <section class="box row" style="padding:15px;">
+            <div class="col-md-12">
+                <h2 style="margin:0;margin-bottom:20px;">
+                    EmailSubscriptions
+                </h2>
+            </div>
+            <hr />
+            <div class="col-md-12 col-lg-8 col-xl-8">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 col-lg-3">
+                        <p class="input-group">
+                            <input type="text" readonly style="height: 38px; border-right: hidden;" class="form-control date" ng-change="findForwardedCases()" uib-datepicker-popup="{{format}}" ng-model="dateRang.str" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default date date-btn" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-3">
+                        <p class="input-group">
+                            <input type="text" readonly style="height: 38px; border-right: hidden;" class="form-control date" ng-change="findForwardedCases()" uib-datepicker-popup="{{format}}" ng-model="dateRang.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default date date-btn" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="tab-pane active" id="fwdCases" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            Total Records: {{forwardedPagination.TotalRecords}}
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <div class="search-bar-cntnr" style="margin-top: 27px; margin-bottom: 25px;">
+                                <input type="text" class="form-control" placeholder="Search" ng-model="forwardedSearch" ng-change="findForwardedCases()" ng-model-options="{debounce: 400}" />
+                                <button class="search-btn"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-condensed table-bordered">
+                        <thead>
+                            <tr style="cursor:pointer;">
+                                <th><strong>Sr #</strong></th>
+                                <td ng-click="sortByForwardedCases(0)">
+                                    <strong>Email</strong>
+                                    <div ng-class="getClassForwardedCases(0)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(1)">
+                                    <strong>Created On</strong>
+                                    <div ng-class="getClassForwardedCases(1)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(6)">
+                                    <strong>Blogs</strong>
+                                    <div ng-class="getClassForwardedCases(6)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(2)">
+                                    <strong>Marketing</strong>
+                                    <div ng-class="getClassForwardedCases(2)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(3)">
+                                    <strong>Messages and Followers</strong>
+                                    <div ng-class="getClassForwardedCases(3)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(4)">
+                                    <strong>Membership and Invoice</strong> <div ng-class="getClassForwardedCases(4)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(5)">
+                                    <strong>Monthly Reports</strong> <div ng-class="getClassForwardedCases(5)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                                <td ng-click="sortByForwardedCases(6)">
+                                    <strong>Unsubscribe From All</strong> <div ng-class="getClassForwardedCases(5)" class="pull-right" style="margin-top:2px;"></div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="itm in forwardedCases">
+                                <td>
+                                    {{((forwardedPagination.Page - 1) * forwardedPagination.PageSize) + ($index+1)}}
+                                </td>
+                                <td>{{itm.email}}</td>
+                                <td>{{itm.createdOn | date: 'dd/MM/yyyy hh:mm:ss a'}}</td>
+                                <td>
+                                    <span ng-if="itm.blogs" class="btn btn-success">Yes</span>
+                                    <span ng-if="!itm.blogs" class="btn btn-danger">No</span>
+                                </td>
+                                <td>
+                                    <span ng-if="itm.marketing" class="btn btn-success">Yes</span>
+                                    <span ng-if="!itm.marketing" class="btn btn-danger">No</span>
+                                </td>
+                                <td>
+                                    <span ng-if="itm.messagesAndFollowers" class="btn btn-success">Yes</span>
+                                    <span ng-if="!itm.messagesAndFollowers" class="btn btn-danger">No</span>
+                                </td>
+                                <td>
+                                    <span ng-if="itm.membershipAndInvoice" class="btn btn-success">Yes</span>
+                                    <span ng-if="!itm.membershipAndInvoice" class="btn btn-danger">No</span>
+                                </td>
+                                <td>
+                                    <span ng-if="itm.monthlyReports" class="btn btn-success">Yes</span>
+                                    <span ng-if="!itm.monthlyReports" class="btn btn-danger">No</span>
+                                </td>
+                                <td>
+                                    <span ng-if="itm.unsubscribeFromAll" class="btn btn-success">Yes</span>
+                                    <span ng-if="!itm.unsubscribeFromAll" class="btn btn-danger">No</span>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul uib-pagination total-items="forwardedPagination.TotalRecords" ng-model="forwardedPagination.Page" items-per-page="forwardedPagination.PageSize" ng-change="loadForwardedCases()" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+
+
+@section SCRIPTS{
+    <script src="../js/AlertMsg/notify.js"></script>
+    <script src="../js/Angular/SomeOthers/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="../js/Angular/SomeOthers/underscore.js"></script>
+    <script src="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.js"></script>
+    <script src="../js/Angular/SomeOthers/commonService.js"></script>
+    <script src="../js/app-Controllers/AppFactory.js"></script>
+    <script src="~/js/app-Controllers/EmailSubscriptions.js"></script>
+}
+
+
+@section CSS{
+    <link href="../js/AlertMsg/notify.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/angular-ui/ui-select/master/dist/select.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <style>
+        .validation {
+            border-color: red;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+}
+
+

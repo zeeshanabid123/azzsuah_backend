@@ -1,0 +1,479 @@
+﻿@using static Azzuha.AdminPanel.Helpers.NavigationIndicatorHelper;
+@using Azzuha.DataViewModels.Response.AdminResponse
+@using Azzuha.Services.Interface.admin
+@{
+    /**/
+    var role = "";
+    var accountService = (IAdminAccountService)Context.Request.HttpContext.RequestServices.GetService(typeof(IAdminAccountService));
+    RightsViewModel ress = new RightsViewModel { DashBorad = false, UserManager = false };
+    if (User.Identity.IsAuthenticated)
+    {
+        var userName = Convert.ToString(@User.Identity.Name);
+        role = accountService.GetRoleIdByUsername(userName);
+
+        var rightss = accountService.GetRightByRoleId(role);
+        if (rightss.Count > 0)
+        {
+            foreach (var name in rightss)
+            {
+                switch (name)
+                {
+                    case "Dashboard":
+                        ress.DashBorad = true;
+                        break;
+                    case "User Management":
+                        ress.UserManager = true;
+                        break;
+                    case "AdminBlog":
+                        ress.AdminBlog = true;
+                        break;
+                    case "MarketingLibaray":
+                        ress.MarketingLibaray = true;
+                        break;
+                    case "Voucher":
+                        ress.Voucher = true;
+                        break;
+                    case "Report":
+                        ress.Report = true;
+                        break;
+                    case "Profile":
+                        ress.Profile = true;
+                        break;
+                    case "EmailSubscription":
+                        ress.EmailSubscription = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    var rights = ress;
+}
+@if (!User.IsInRole("SuperAdmin"))
+{
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="/Dashboard/Index" class="brand-link">
+        <img src="~/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">FitCntr Admin</span>
+    </a>
+    <div class="sidebar">
+        @if (User.Identity.IsAuthenticated)
+            {
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+            </div>
+            <div class="info">
+                <a href="/Dashboard/Index" class="d-block">Hi, @User.Identity.Name </a>
+            </div>
+        </div>
+            }
+            else
+            {
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="info">
+                <a href="/Dashboard/Index" class="d-block">Hi, Visitor</a>
+            </div>
+        </div>
+            }
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item ">
+                    <a asp-controller="Dashboard" asp-action="Index" class="nav-link @Url.MakeActiveClass("Dashboard", "index")">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Overview
+                        </p>
+                    </a>
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                }
+                @if (ress.UserManager)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Account" asp-action="Register" class="nav-link @Url.MakeActiveClass("Account", "Register")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                User Management
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.AdminBlog)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AboutUs" asp-action="Index" class="nav-link @Url.MakeActiveClass("AboutUs", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                About us
+                            </p>
+                        </a>
+                    </li>
+
+                }
+                @if (ress.AdminBlog)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AboutUs" asp-action="news" class="nav-link @Url.MakeActiveClass("AboutUs", "news")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                News section
+                            </p>
+                        </a>
+                    </li>
+
+                }
+                @if (ress.AdminBlog)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AboutUs" asp-action="ContactInfo" class="nav-link @Url.MakeActiveClass("AboutUs", "ContactInfo")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Contact Info section
+                            </p>
+                        </a>
+                    </li>
+
+                }
+                @if (ress.AdminBlog)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AboutUs" asp-action="BankDetail" class="nav-link @Url.MakeActiveClass("AboutUs", "BankDetail")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Bank Account section
+                            </p>
+                        </a>
+                    </li>
+
+                }
+                @if (ress.Voucher)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="MainSliderAdmin" asp-action="Index" class="nav-link @Url.MakeActiveClass("MainSliderAdmin", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Home page Slider
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.MarketingLibaray)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AdminCourses" asp-action="Index" class="nav-link @Url.MakeActiveClass("AdminCourses", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Courses
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.Voucher)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AdminEvents" asp-action="Index" class="nav-link @Url.MakeActiveClass("AdminEvents", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Events
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.EmailSubscription)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AdminGallery" asp-action="Index" class="nav-link @Url.MakeActiveClass("AdminGallery", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Gallery
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.Report)
+                {
+                    <li class="nav-item">
+                        <a asp-controller="AdminMedia" asp-action="Index" class="nav-link @Url.MakeActiveClass("AdminMedia", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Media Management</p>
+                        </a>
+                    </li>
+                }
+                @if (ress.Report)
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Report" asp-action="GetFeedbackList" class="nav-link @Url.MakeActiveClass("Report", "GetFeedbackList")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Feedback</p>
+                        </a>
+                    </li>
+                }
+                @if (ress.Report)
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Report" asp-action="GetBlogFeedbackList" class="nav-link @Url.MakeActiveClass("Report", "GetBlogFeedbackList")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Blog Suggestion</p>
+                        </a>
+                    </li>
+                }
+
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item ">
+                        <form class="" asp-controller="Account" asp-action="Logout">
+
+                            <button type="submit" class="nav-link">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a asp-page="/Account/Login" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a asp-page="/Account/Register" class="nav-link">Register</a>
+                    </li>
+                }
+
+            </ul>
+
+        </nav>
+    </div>
+</aside>
+
+}
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="/Dashboard/Index" class="brand-link">
+        <img src="~/img/footer-logo.png" alt="AdminLTE Logo" class="brand-image img-circle "
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">Azzuaha Admin</span>
+    </a>
+    <div class="sidebar">
+        @if (User.Identity.IsAuthenticated)
+        {
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                @*<img src="~/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">*@
+            </div>
+            <div class="info">
+                <a href="/Dashboard/Index" class="d-block">Hi, @User.Identity.Name </a>
+            </div>
+        </div>
+        }
+        else
+        {
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="info">
+                <a href="/Dashboard/Index" class="d-block">Hi, Visitor</a>
+            </div>
+        </div>
+        }
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item ">
+                    <a asp-controller="Dashboard" asp-action="Index" class="nav-link @Url.MakeActiveClass("Dashboard", "index")">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Overview
+                        </p>
+                    </a>
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                }
+                @if (ress.UserManager)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Account" asp-action="Register" class="nav-link @Url.MakeActiveClass("Account", "Register")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                User Management
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.AdminBlog)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AboutUs" asp-action="Index" class="nav-link @Url.MakeActiveClass("AboutUs", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                About us
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.AdminBlog)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AboutUs" asp-action="news" class="nav-link @Url.MakeActiveClass("AboutUs", "news")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                News section
+                            </p>
+                        </a>
+                    </li>
+
+                }
+                @if (ress.AdminBlog)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AboutUs" asp-action="ContactInfo" class="nav-link @Url.MakeActiveClass("AboutUs", "ContactInfo")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Contact Info section
+                            </p>
+                        </a>
+                    </li>
+
+                }
+                @if (ress.AdminBlog)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AboutUs" asp-action="BankDetail" class="nav-link @Url.MakeActiveClass("AboutUs", "BankDetail")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Bank Account section
+                            </p>
+                        </a>
+                    </li>
+
+                }
+                @if (ress.MarketingLibaray)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AdminCourses" asp-action="Index" class="nav-link @Url.MakeActiveClass("AdminCourses", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Courses
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.Voucher)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="JsonEditor" asp-action="Index" class="nav-link @Url.MakeActiveClass("JsonEditor", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Degree Program Page
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.Voucher)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="MainSliderAdmin" asp-action="Index" class="nav-link @Url.MakeActiveClass("MainSliderAdmin", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Home page Slider
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.Voucher)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AdminEvents" asp-action="Index" class="nav-link @Url.MakeActiveClass("AdminEvents", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Events
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.EmailSubscription)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="AdminGallery" asp-action="Index" class="nav-link @Url.MakeActiveClass("AdminGallery", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Gallery
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (ress.Report)
+                {
+                    <li class="nav-item">
+                        <a asp-controller="AdminMedia" asp-action="Index" class="nav-link @Url.MakeActiveClass("AdminMedia", "Index")">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Media</p>
+                        </a>
+                    </li>
+                }
+                @if (ress.Report)
+                    @*{
+            <li class="nav-item">
+                <a asp-controller="Report" asp-action="GetFeedbackList" class="nav-link @Url.MakeActiveClass("Report", "GetFeedbackList")">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Feedback</p>
+                </a>
+            </li>
+            }*@
+                    @if (ress.Report)
+                    {
+                        <li class="nav-item has-treeview @Html.IsSelectedParent(actions: "GetClientMonthlyReports,GetExternalMonthlyReports", controllers: "Report") ">
+                            <a href="#" class="nav-link @Html.IsSelected(actions: "GetClientMonthlyReports,GetExternalMonthlyReports", controllers: "Report") ">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Reports
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a asp-controller="Report" asp-action="GetContactUsReports" class="nav-link @Url.MakeActiveClass("Report", "GetContactUsReports")">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Contact Us List </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Report" asp-action="GetadmissionReports" class="nav-link @Url.MakeActiveClass("Report", "GetadmissionReports")">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Admission List </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    }
+
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item ">
+                            <form class="" asp-controller="Account" asp-action="Logout">
+                                <button type="submit" class="nav-link">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item d-none d-sm-inline-block">
+                            <a asp-page="/Account/Login" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item d-none d-sm-inline-block">
+                            <a asp-page="/Account/Register" class="nav-link">Register</a>
+                        </li>
+                    }
+                </ul>
+
+        </nav>
+    </div>
+</aside>
